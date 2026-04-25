@@ -1,0 +1,16 @@
+{
+  "name": "tg_explorer",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "src/extract_messages.js",
+  "scripts": {
+    "start": "node src/extract_messages.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "telegram": "^2.26.22"
+  }
+}

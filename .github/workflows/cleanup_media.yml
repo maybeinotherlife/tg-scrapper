@@ -1,5 +1,6 @@
 name: Clean Media Files
 
+
 on:
   workflow_dispatch:
     inputs:
@@ -8,6 +9,7 @@ on:
         required: true
         type: boolean
         default: false
+
 
 permissions:
   contents: write

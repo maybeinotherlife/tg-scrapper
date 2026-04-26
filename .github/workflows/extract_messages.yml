@@ -1,0 +1,38 @@
+name: Run Telegram Scraper
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - run: npm install
+
+      - name: Run script
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
+        run: node src/extract_messages.js
+
+      - name: Commit and push changes
+        run: |
+          git config user.email "bot@bot.com"
+          git config user.name "Extractor"
+          git add .
+          git commit -m "Update scraped messages" || echo "No changes to commit"
+          git push

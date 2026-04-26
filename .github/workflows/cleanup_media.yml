@@ -1,0 +1,57 @@
+name: Clean Media Files
+
+on:
+  workflow_dispatch:
+    inputs:
+      with_data:
+        description: 'Delete JSON files too (info.json, messages.json)'
+        required: true
+        type: boolean
+        default: false
+      channel:
+        description: 'Channel username (leave empty for all channels)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  clean-media:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Clean media files
+        run: |
+          ARGS=""
+          if [ "${{ inputs.with_data }}" == "true" ]; then
+            ARGS="$ARGS --with-data"
+          fi
+          if [ -n "${{ inputs.channel }}" ]; then
+            ARGS="$ARGS --channel=${{ inputs.channel }}"
+          fi
+          node src/cleanup_media.js $ARGS
+
+      - name: Commit and push changes
+        run: |
+          git config user.email "bot@bot.com"
+          git config user.name "Extractor"
+          git add -A
+          git diff --staged --quiet || git commit -m "🗑️ Clean media files${{ inputs.channel != '' && format(' ({0})', inputs.channel) || '' }}${{ inputs.with_data == 'true' && ' + data' || '' }}"
+          git push

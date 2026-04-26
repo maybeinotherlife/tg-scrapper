@@ -17,14 +17,12 @@ module.exports = {
         'OfficialRezaPahlavi',
         'netblocks',
         'ircfspace',
-        'ScorchSword',
         'TechTube',
         'MatinSenPaii',
         'mitivpn',
         'JinxFamily',
         'CDSTOP',
         'PS_Family2',
-        'WeebsDungeon',
     ]
 };
 

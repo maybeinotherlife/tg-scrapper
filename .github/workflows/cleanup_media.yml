@@ -1,6 +1,5 @@
 name: Clean Media Files
 
-
 on:
   workflow_dispatch:
     inputs:
@@ -9,7 +8,11 @@ on:
         required: true
         type: boolean
         default: false
-
+      channel:
+        description: 'Channel username (leave empty for all channels)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -36,16 +39,19 @@ jobs:
 
       - name: Clean media files
         run: |
+          ARGS=""
           if [ "${{ inputs.with_data }}" == "true" ]; then
-            node src/cleanup_media.js --with-data
-          else
-            node src/cleanup_media.js
+            ARGS="$ARGS --with-data"
           fi
+          if [ -n "${{ inputs.channel }}" ]; then
+            ARGS="$ARGS --channel=${{ inputs.channel }}"
+          fi
+          node src/cleanup_media.js $ARGS
 
       - name: Commit and push changes
         run: |
           git config user.email "bot@bot.com"
           git config user.name "Extractor"
           git add -A
-          git diff --staged --quiet || git commit -m "🗑️ Clean media files${{ inputs.with_data == 'true' && ' + data' || '' }}"
+          git diff --staged --quiet || git commit -m "🗑️ Clean media files${{ inputs.channel != '' && format(' ({0})', inputs.channel) || '' }}${{ inputs.with_data == 'true' && ' + data' || '' }}"
           git push

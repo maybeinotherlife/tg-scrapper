@@ -1,11 +1,23 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-async function cleanAllMedia(withData = false) {
+async function cleanAllMedia(withData = false, targetChannel = null) {
     const dataDir = path.join(__dirname, '..', 'data', 'channels');
 
     try {
-        const channels = await fs.readdir(dataDir);
+        let channels = await fs.readdir(dataDir);
+
+        // اگر چنل خاصی مشخص شده، فقط اون رو پردازش کن
+        if (targetChannel) {
+            const channelExists = channels.includes(targetChannel);
+            if (!channelExists) {
+                console.error(`❌ Channel "${targetChannel}" not found!`);
+                return;
+            }
+            channels = [targetChannel];
+            console.log(`🎯 Targeting channel: ${targetChannel}`);
+        }
+
         let totalDeleted = 0;
         let totalSize = 0;
 
@@ -50,6 +62,9 @@ async function cleanAllMedia(withData = false) {
         }
 
         console.log(`\n✅ Cleanup complete!`);
+        if (targetChannel) {
+            console.log(`   Channel: ${targetChannel}`);
+        }
         console.log(`   Mode: ${withData ? 'WITH DATA (media + JSON)' : 'MEDIA ONLY'}`);
         console.log(`   Files deleted: ${totalDeleted}`);
         console.log(`   Space freed: ${totalSize.toFixed(2)} MB`);
@@ -59,6 +74,13 @@ async function cleanAllMedia(withData = false) {
     }
 }
 
-// دریافت آرگومان از command line
+// دریافت آرگومان‌ها
 const withData = process.argv.includes('--with-data');
-cleanAllMedia(withData);
+
+let channel = null;
+const channelArg = process.argv.find(a => a.startsWith('--channel='));
+if (channelArg) {
+    channel = channelArg.split('=')[1];
+}
+
+cleanAllMedia(withData, channel);

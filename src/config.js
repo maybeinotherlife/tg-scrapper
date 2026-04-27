@@ -18,6 +18,7 @@ module.exports = {
         'netblocks',
         'ircfspace',
         'TechTube',
+        'factnameh',
         'MoradVaisiPodcasts',
         'OfficialRezaPahlavi',
         'mitivpn',

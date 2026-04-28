@@ -423,7 +423,8 @@ async function processChannel(channelUsername) {
     await saveJSON(messagesPath, existingMessages);
     await saveJSON(infoPath, channelInfo);
 
-    const MAX_ALLOWED_PROJECT_FILES_SIZE = (1.8) * 1024 * 1024 * 1024; // 1.5 GB
+    // const MAX_ALLOWED_PROJECT_FILES_SIZE = (1.8) * 1024 * 1024 * 1024;
+    const MAX_ALLOWED_PROJECT_FILES_SIZE = (0.5) * 1024 * 1024 * 1024;
     await cleanupOldMedia(dataDir, MAX_ALLOWED_PROJECT_FILES_SIZE);
 
     console.log(`✅ Channel processing completed: @${channelUsername}`);

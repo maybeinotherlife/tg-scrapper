@@ -27,4 +27,3 @@ module.exports = {
         'PS_Family2',
     ]
 };
-

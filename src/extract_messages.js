@@ -437,6 +437,7 @@ async function processChannel(channel) {
     console.log(`✅ Channel processing completed: @${channelUsername}`);
 }
 
+
 async function main() {
     console.log(`🚀 Starting Telegram scraper...`);
     console.log(`🔌 Connecting to Telegram...`);

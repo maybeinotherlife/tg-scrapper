@@ -143,7 +143,7 @@ async function saveJSON(filePath, data) {
     console.log(`💾 Saved JSON: ${filePath}`);
 }
 
-async function downloadMedia(message, channelDir) {
+async function downloadMedia(message, channelDir,maxAllowedFileSizeMb) {
     if (!message.media) return null;
 
     try {
@@ -152,20 +152,17 @@ async function downloadMedia(message, channelDir) {
 
         const mediaSizeMB = mediaSize / (1024 * 1024);
 
-        if (mediaSizeMB > 80) {
-            console.log(`⏭️  Skipping large file: ${mediaSizeMB.toFixed(2)} MB (> 80 MB)`);
+        if (mediaSizeMB > maxAllowedFileSizeMb) {
+            console.log(`⏭️  Skipping large file: ${mediaSizeMB.toFixed(2)} MB (> ${maxAllowedFileSizeMb} MB)`);
             return null;
         }
 
-        // تشخیص extension
         let extension = '';
 
-        // عکس
         if (message.media.photo) {
             extension = '.jpg';
         }
 
-        // فایل‌ها
         if (message.media.document) {
             const mimeType = message.media.document.mimeType || '';
 
@@ -192,7 +189,6 @@ async function downloadMedia(message, channelDir) {
 
             extension = mimeMap[mimeType] || '';
 
-            // اگر از MIME نگرفتیم، از filename بگیریم
             if (!extension && message.media.document.attributes) {
                 for (const attr of message.media.document.attributes) {
                     if (attr.fileName) {
@@ -205,7 +201,6 @@ async function downloadMedia(message, channelDir) {
                 }
             }
 
-            // fallback
             if (!extension) {
                 extension = '.bin';
             }
@@ -251,7 +246,7 @@ async function buildIndex() {
         const channels = config.channels;
         const output = [];
 
-        for (const ch of channels) {
+        for (const {username:ch,maxAllowedFileSizeMb} of channels) {
             const infoPath = path.join(base, ch, 'info.json');
             const messagesPath = path.join(base, ch, 'messages.json');
 
@@ -300,7 +295,8 @@ async function buildIndex() {
 
 
 
-async function processChannel(channelUsername) {
+async function processChannel(channel) {
+    const {username:channelUsername,maxAllowedFileSizeMb} = channel
     console.log(`\n${'='.repeat(60)}`);
     console.log(`🔄 Processing channel: @${channelUsername}`);
     console.log(`${'='.repeat(60)}`);
@@ -393,7 +389,7 @@ async function processChannel(channelUsername) {
         }
 
         if (message.media) {
-            const mediaFile = await downloadMedia(message, channelDir);
+            const mediaFile = await downloadMedia(message, channelDir,maxAllowedFileSizeMb);
             if (mediaFile) {
                 messageData.media = mediaFile;
             }

@@ -69,18 +69,19 @@ async function getAllMediaFiles(dataDir) {
 
         for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);
-
+            if(entry.name.startsWith('profile')){
+                continue;
+            }
             if (entry.isDirectory()) {
                 await scanDir(fullPath);
             } else {
-                // فقط فایل‌های مدیا (عکس، ویدیو، سند)
                 const ext = path.extname(entry.name).toLowerCase();
-                if (['.jpg', '.jpeg', '.png', '.gif', '.mp4', '.mov', '.avi', '.pdf', '.zip', '.rar'].includes(ext)) {
+                if (['.jpg', '.jpeg', '.png', '.gif', '.mp4','.mp3', '.mov', '.avi', '.pdf', '.zip', '.rar'].includes(ext)) {
                     const stats = await fs.stat(fullPath);
                     mediaFiles.push({
                         path: fullPath,
                         size: stats.size,
-                        mtime: stats.mtime.getTime() // زمان آخرین تغییر
+                        mtime: stats.mtime.getTime()
                     });
                 }
             }
@@ -293,6 +294,14 @@ async function buildIndex() {
     }
 }
 
+async function fileExists(filePath) {
+    try {
+        await fs.access(filePath);
+        return true;
+    } catch {
+        return false;
+    }
+}
 
 
 async function processChannel(channel) {
@@ -346,14 +355,15 @@ async function processChannel(channel) {
     console.log(`   Participants: ${channelInfo.participantsCount}`);
 
     // دانلود عکس پروفایل (فقط اگر قبلاً دانلود نشده)
-    if (!channelInfo.profilePhoto) {
+    const photoPath = path.join(channelDir, 'profile.jpg');
+
+    if (!(await fileExists(photoPath))) {
         try {
             console.log(`📸 Downloading profile photo...`);
 
             const buffer = await client.downloadProfilePhoto(entity);
 
             if (buffer) {
-                const photoPath = path.join(channelDir, 'profile.jpg');
                 await fs.writeFile(photoPath, buffer);
                 channelInfo.profilePhoto = 'profile.jpg';
                 console.log(`✅ Profile photo downloaded`);
@@ -420,7 +430,7 @@ async function processChannel(channel) {
     await saveJSON(infoPath, channelInfo);
 
     // const MAX_ALLOWED_PROJECT_FILES_SIZE = (1.8) * 1024 * 1024 * 1024;
-    const MAX_ALLOWED_PROJECT_FILES_SIZE = (1.5) * 1024 * 1024 * 1024;
+    const MAX_ALLOWED_PROJECT_FILES_SIZE = (.5) * 1024 * 1024 * 1024;
     await cleanupOldMedia(dataDir, MAX_ALLOWED_PROJECT_FILES_SIZE);
 
     console.log(`✅ Channel processing completed: @${channelUsername}`);

@@ -1,10 +1,5 @@
 [
   {
-    "id": 2863,
-    "date": "2026-04-26T18:10:52.000Z",
-    "text": "میتی وی پی ان باز این آیپی تمیز رو داده رو کانفیگ‌هاش. یه تست بکنید: 104.20.6.134\nکلودفلر"
-  },
-  {
     "id": 2864,
     "date": "2026-04-26T18:13:16.000Z",
     "text": "vless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.20.6.134:2096?encryption=none&security=tls&sni=sni.111000.indevs.in&insecure=1&allowInsecure=1&type=ws&host=sni.111000.indevs.in&path=%2F#%40MiTiVPN%20%20%F0%9F%87%B8%F0%9F%87%A8\nvless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.20.6.134:2096?encryption=none&security=tls&sni=sni.jpmj.dev&insecure=1&allowInsecure=1&type=ws&host=sni.jpmj.dev&path=%2F#%40MiTiVPN%20%F0%9F%87%B3%F0%9F%87%B1\nvless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.20.6.134:2096?encryption=none&security=tls&sni=sni.111000.indevs.in&insecure=0&allowInsecure=0&type=ws&path=%2F#%40MiTiVPN%20-3\nvless://388a6c57-87e7-420b-afe2-b3eb670fd7da@104.20.6.134:80?encryption=none&security=none&type=ws&host=vip.yaml7.ggff.net&path=%2F#T.me%2FMiTiVPN%202\nvless://6202b230-417c-4d8e-b624-0f71afa9c75d@104.20.6.134:2096?encryption=none&security=tls&sni=sni.jpmj.dev&fp=firefox&alpn=http%2F1.1&insecure=1&allowInsecure=1&type=ws&host=sni.jpmj.dev&path=%2F%3FTelegram%F0%9F%87%A8%F0%9F%87%B3%40WangCai2%3D#.T.me%2FMiTiVPN%203\nvless://8c4604ef-749c-4b56-adf1-7da405002a21@104.20.6.134:2053?encryption=none&security=tls&sni=qyi.fqjd663.ggff.net&fp=firefox&alpn=http%2F1.1&insecure=0&allowInsecure=0&type=ws&host=qyi.fqjd663.ggff.net&path=%2F#T.me%2FMiTiVPN%204\nvless://06ef598c-1555-4887-b3f9-08214a2f6792@104.20.6.134:443?encryption=none&security=tls&sni=2026.hhhhh.eu.org&fp=firefox&alpn=http%2F1.1&insecure=0&allowInsecure=0&type=ws&host=2026.hhhhh.eu.org&path=%2F222.167.202.31%3A7443#T.me%2FMiTiVPN%205"
@@ -397,5 +392,10 @@
     "id": 2941,
     "date": "2026-05-03T15:08:00.000Z",
     "text": "و یه خبر خوب بهتون بدم. Nano Banana 2 توی Flow به عنوان مدل پیش‌فرض تصویرسازی استفاده می‌شه و صفر اعتبار (zero credits) مصرف می‌کنه. یعنی برای تولید عکس معمولی با این مدل، از اعتبارهای روزانه‌ی Flow استفاده نمی‌شه.\nو از کاربران رایگان، خیلی‌ها توی ردیت گزارش دادن که می‌تونن چند صد تا حتی ۱۰۰۰+ عکس توی روز بسازن. بعضی‌ها با لاگ‌اوت و ورود با اکانت گوگل دیگه، عملاً نامحدود استفاده می‌کنن.\nفکر کنم رقابت با Gpt-2 بالا گرفته"
+  },
+  {
+    "id": 2942,
+    "date": "2026-05-03T15:53:56.000Z",
+    "text": "❌ پولت رو بده نیازمند، سودش بیشتره تا بخوای شکن بخری! من شکن حرفه‌ای خریدم، اگر اون پول رو میدادم غذا برای گربه‌ها میخریدم، بهشت رو واسه خودم خریده بودم! نمیدونم چرا اینقدر شکن رو بولد میکنن! البته به قول متین: «شکن چند وقت پیش هم اومد خودش رو بولد کرد و مردم حمله کردن اکانت خریدن تا روی chat gpt کانفیگ بسازن، بعد که فروخت، چت جی‌پی‌تی رو بست!» اکثر این‌هایی که تبلیغ شکن میکنن بازاریابِ همین دزدان و قوادان هستن! که مردم برن بخرن بعد قطع کنن! تهشم بگن: «اختلال از سمت زیرساخت هست و ما تابع قوانین کشور هستیم» یعنی پولت رو نمیدیم و بهت هم میخندیم!"
   }
 ]

@@ -1,11 +1,5 @@
 [
   {
-    "id": 2890,
-    "date": "2026-04-28T16:12:17.000Z",
-    "media": "media_2890.pdf",
-    "caption": "آموزش کامل\nمتود Goose–Relay–VPN\nبصورت PDF\nسرعت: بهتر از MHRV\nحجم: مشابه MHRV\nپیش‌نیاز: نیاز به سرور خارج دارد،\nاما نیازی به MITM و سرتیفیکیت ندارد.\nگیتهاب پروژه:\nhttps://github.com/Kianmhz/GooseRelayVPN"
-  },
-  {
     "id": 2891,
     "date": "2026-04-28T16:12:17.000Z",
     "media": "media_2891.zip",

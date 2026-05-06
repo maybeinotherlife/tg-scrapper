@@ -427,7 +427,12 @@ async function processChannel(channel) {
         console.log(`ℹ️  No new message IDs to update`);
     }
 
-    await saveJSON(messagesPath, existingMessages.slice(1).slice(-200));
+    let toSave;
+    if(existingMessages.length > 200){
+        toSave = existingMessages.slice(1)
+    }
+    toSave = existingMessages.slice(-200)
+    await saveJSON(messagesPath, toSave);
     await saveJSON(infoPath, channelInfo);
 
     // const MAX_ALLOWED_PROJECT_FILES_SIZE = (1.8) * 1024 * 1024 * 1024;
